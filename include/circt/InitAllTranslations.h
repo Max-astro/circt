@@ -17,6 +17,7 @@
 #include "circt/Dialect/FIRRTL/FIREmitter.h"
 #include "circt/Dialect/FIRRTL/FIRParser.h"
 #include "circt/Dialect/MSFT/ExportTcl.h"
+#include "circt/Dialect/HW/StandardCellLiberty.h"
 #include "circt/Target/DebugInfo.h"
 #include "circt/Target/ExportSMTLIB.h"
 #include "circt/Target/ExportSystemC.h"
@@ -32,6 +33,7 @@ namespace circt {
 inline void registerAllTranslations() {
   static bool initOnce = []() {
     arc::registerArcModelInfoTranslation();
+    liberty::registerFromLibertyFileTranslation();
     calyx::registerToCalyxTranslation();
     firrtl::registerFromFIRFileTranslation();
     firrtl::registerToFIRFileTranslation();

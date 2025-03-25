@@ -52,3 +52,4 @@ add_circt_library(CIRCTHWReductions
 )
 
 add_subdirectory(Transforms)
+add_subdirectory(ImportLiberty)
