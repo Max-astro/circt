@@ -380,7 +380,7 @@ llvm::ParseResult LibertyParser::parseLuTemplate(LibraryAST &lib) {
 }
 
 //===--------------------------------------------------------------------===//
-// Value printer
+// AST printer
 //===--------------------------------------------------------------------===//
 
 void printDefineType(llvm::raw_ostream &os, const DefineType &define,
@@ -441,79 +441,6 @@ void printLibaryAST(llvm::raw_ostream &os, const LibraryAST &lib) {
   printCommonGroupAST(os, lib.group, 2);
 }
 
-// void recurPrint(const StringValue &v, llvm::raw_ostream &os, int indent)
-// {
-//   os << llvm::indent(indent) << v << "\n";
-// }
-
-// void recurPrint(const FloatValue &v, llvm::raw_ostream &os, int indent) {
-//   os << llvm::indent(indent) << v << "\n";
-// }
-
-// void recurPrint(const IndexValue &v, llvm::raw_ostream &os, int indent) {
-//   os << llvm::indent(indent) << "[";
-//   for (auto &i : v) {
-//     os << i << ", ";
-//   }
-//   os << "]\n";
-// }
-
-// void recurPrint(const VectorValue &v, llvm::raw_ostream &os, int indent)
-// {
-//   os << llvm::indent(indent) << "[";
-//   for (auto &i : v) {
-//     os << i << ", ";
-//   }
-//   os << "]\n";
-// }
-
-// void recurPrint(const Vector2DValue &v, llvm::raw_ostream &os, int
-// indent) {
-//   os << llvm::indent(indent) << "[";
-//   for (auto &i : v) {
-//     recurPrint(i, os, indent + 2);
-//   }
-//   os << "]\n";
-// }
-
-// void recurPrint(const Vector3DValue &v, llvm::raw_ostream &os, int
-// indent) {
-//   os << llvm::indent(indent) << "[";
-//   for (auto &i : v) {
-//     recurPrint(i, os, indent + 2);
-//   }
-//   os << "]\n";
-// }
-
-// void recurPrint(const DefineValue &v, llvm::raw_ostream &os, int indent)
-// {
-//   os << llvm::indent(indent) << "Define(" << v.attributeName << ", "
-//      << v.groupName << ", " << v.attributeType << ")\n";
-// }
-
-// void recurPrint(const GroupValue &v, llvm::raw_ostream &os, int indent) {
-//   os << "\n"
-//      << llvm::indent(indent) << "Group: " << v->groupName << "(" <<
-//      v->groupKey
-//      << ")\n";
-//   // for (auto &[key, value] : v->data) {
-//   //   os << llvm::indent(indent + 2) << key << " : ";
-//   //   std::visit([&](const auto &val) { recurPrint(val, os, indent + 2);
-//   },
-//   //              value);
-//   // }
-// }
-
-// void recurPrintLibInfo(const LibraryInfo &lib, llvm::raw_ostream &os) {
-//   os << "Print library: " << lib.libName << "\n";
-//   for (auto &&[arrtibute, value] : lib.getData()) {
-//     llvm::outs() << "arrtibute: " << arrtibute << " : ";
-//     std::visit([&](const auto &val) { recurPrint(val, llvm::outs(), 0);
-//     },
-//                value);
-//   }
-// }
-
 } // namespace
 
 //===----------------------------------------------------------------------===//
@@ -566,12 +493,7 @@ circt::liberty::importLibertyFile(SourceMgr &sourceMgr, MLIRContext *context,
 
   auto &&libInfo = parser.getParseResult();
   printLibaryAST(llvm::outs(), libInfo);
-  // recurPrintLibInfo(libInfo, llvm::outs());
-  // for (auto &&[arrtibute, value] : libInfo.getData()) {
-  //   llvm::outs() << "arrtibute: " << arrtibute << ", ";
-  //   std::visit([&](const auto &val) { recurPrint(val, llvm::outs(), 0); },
-  //              value);
-  // }
+
   llvm::outs() << "\n";
   return module;
 }
